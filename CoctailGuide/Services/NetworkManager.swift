@@ -17,7 +17,7 @@ class NetworkManager {
     
     private init() {}
     
-    func fetchCoctails(name: String) async -> [Coctail] {
+    func fetchCoctails(name: String) async -> [Cocktail] {
         let query = name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
              let fullURLString = baseURL + query
         
@@ -33,7 +33,7 @@ class NetworkManager {
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
             
-            let decoded = try JSONDecoder().decode([Coctail].self, from: data)
+            let decoded = try JSONDecoder().decode([Cocktail].self, from: data)
             return decoded
             
         } catch {

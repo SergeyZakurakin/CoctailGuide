@@ -9,10 +9,10 @@ import Foundation
 
 @MainActor
 final class HomeViewModel: ObservableObject {
-    @Published var coctails: [Coctail] = []
+    @Published var cocktails: [Cocktail] = []
     
-    func searchCoctails(name: String) async {
+    func searchCocktails(name: String) async {
         let result = await NetworkManager.shared.fetchCoctails(name: name)
-        coctails = result
+        cocktails = result
     }
 }

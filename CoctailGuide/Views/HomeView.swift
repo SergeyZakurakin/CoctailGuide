@@ -11,42 +11,36 @@ struct HomeView: View {
     @StateObject var vm = HomeViewModel()
     @State private var search = ""
     
-    
     var body: some View {
         NavigationStack {
             VStack {
                 TextField("Search", text: $search)
                     .textFieldStyle(.roundedBorder)
-                
                 Button {
                     Task {
-                        await vm.searchCoctails(name: search)
+                        await vm.searchCocktails(name: search)
                     }
                 } label: {
                     Text("Start Search")
                 }
                 
                 List {
-                    ForEach(vm.coctails, id: \.name) { coctail in
+                    ForEach(vm.cocktails, id: \.name) { cocktail in
                         VStack {
-                            NavigationLink(coctail.name) {
-                                Text(coctail.name)
+                            NavigationLink(cocktail.name) {
+                                DetailView(cocktail: cocktail)
                             }
-                            Text(coctail.instructions)
-                                .foregroundStyle(.red)
-                            ForEach (coctail.ingredients, id: \.self) { ingredient in
-                                Text(ingredient)
-                            }
-                            
                         }
                     }
                 }
-                
+                NavigationLink("Favorite") {
+                    FavoritesCocktailView()
+                }
+
             }
             .navigationTitle("CocktailGuide")
             .navigationBarTitleDisplayMode(.inline)
         }
-     
     }
 }
 
