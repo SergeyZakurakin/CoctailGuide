@@ -13,33 +13,40 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                TextField("Search", text: $search)
-                    .textFieldStyle(.roundedBorder)
-                Button {
-                    Task {
-                        await vm.searchCocktails(name: search)
-                    }
-                } label: {
-                    Text("Start Search")
-                }
+            
+            ZStack {
+                Image(.cocktail)
+                    .resizable()
+                    .frame(height: 300)
                 
-                List {
-                    ForEach(vm.cocktails, id: \.name) { cocktail in
-                        VStack {
-                            NavigationLink(cocktail.name) {
-                                DetailView(cocktail: cocktail)
+                VStack {
+                    TextField("Search", text: $search)
+                        .textFieldStyle(.roundedBorder)
+                    Button {
+                        Task {
+                            await vm.searchCocktails(name: search)
+                        }
+                    } label: {
+                        Text("Start Search")
+                    }
+                    
+                    List {
+                        ForEach(vm.cocktails, id: \.name) { cocktail in
+                            VStack {
+                                NavigationLink(cocktail.name) {
+                                    DetailView(cocktail: cocktail)
+                                }
                             }
                         }
                     }
+                    NavigationLink("Favorite") {
+                        FavoritesCocktailView()
+                    }
+                    
                 }
-                NavigationLink("Favorite") {
-                    FavoritesCocktailView()
-                }
-
+                .navigationTitle("CocktailGuide")
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationTitle("CocktailGuide")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

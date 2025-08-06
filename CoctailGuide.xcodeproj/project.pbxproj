@@ -73,13 +73,13 @@
 		DC54F26E2E3FDE8E002A19E4 /* CoctailGuide */ = {
 			isa = PBXGroup;
 			children = (
+				DC54F2732E3FDE96002A19E4 /* Services */,
 				DC54F2762E3FDEB8002A19E4 /* Models */,
 				DC54F2792E3FE631002A19E4 /* ViewModels */,
-				DC54F2732E3FDE96002A19E4 /* Services */,
+				DC54F27C2E4033F6002A19E4 /* Views */,
 				DC54F26A2E3FDE8E002A19E4 /* Preview Content */,
 				DC54F26B2E3FDE8E002A19E4 /* Assets.xcassets */,
 				DC54F26C2E3FDE8E002A19E4 /* CocktailGuideApp.swift */,
-				DC54F27C2E4033F6002A19E4 /* Views */,
 			);
 			path = CoctailGuide;
 			sourceTree = "<group>";
