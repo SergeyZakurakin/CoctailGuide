@@ -38,8 +38,7 @@ struct FavoritesCocktailView: View {
                 }
                 .onDelete(perform: deleteCocktails)
             }
-            
-            .navigationTitle("Избранные коктейли")
+            .navigationTitle("Favorites")
         }
     }
     

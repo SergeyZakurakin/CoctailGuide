@@ -13,39 +13,67 @@ struct HomeView: View {
     
     var body: some View {
         NavigationStack {
-            
-            ZStack {
-                Image(.cocktail)
-                    .resizable()
-                    .frame(height: 300)
-                
-                VStack {
-                    TextField("Search", text: $search)
-                        .textFieldStyle(.roundedBorder)
-                    Button {
-                        Task {
-                            await vm.searchCocktails(name: search)
-                        }
-                    } label: {
-                        Text("Start Search")
-                    }
+            VStack(spacing: 20) {
+                ZStack(alignment: .bottom) {
+                    Image(.cocktail)
+                        .resizable()
+                        .frame(height: 300)
+                        .scaledToFit()
                     
-                    List {
-                        ForEach(vm.cocktails, id: \.name) { cocktail in
-                            VStack {
-                                NavigationLink(cocktail.name) {
-                                    DetailView(cocktail: cocktail)
-                                }
+                    Text("Cocktail Guide")
+                        .foregroundStyle(.black)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .frame(maxWidth: .infinity)
+                        .background(.white)
+                        .opacity(0.5)
+                        .padding(.bottom, 20)
+                }
+                TextField("Tap Cocktail name here", text: $search)
+                    .padding(6)
+                    .background(
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundStyle(.gray)
+                            .opacity(0.2)
+                    )
+                    .padding(.horizontal)
+                
+                Button {
+                    Task {
+                        await vm.searchCocktails(name: search)
+                    }
+                } label: {
+                    Text("Search")
+                        .foregroundStyle(.black)
+                        .padding(6)
+                        .background(
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(.gray)
+                        )
+                }
+                
+                List {
+                    ForEach(vm.cocktails, id: \.name) { cocktail in
+                        VStack {
+                            NavigationLink(cocktail.name) {
+                                DetailView(cocktail: cocktail)
                             }
                         }
                     }
-                    NavigationLink("Favorite") {
-                        FavoritesCocktailView()
-                    }
-                    
                 }
-                .navigationTitle("CocktailGuide")
-                .navigationBarTitleDisplayMode(.inline)
+            }
+            .ignoresSafeArea()
+            .preferredColorScheme(.dark)
+            
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        FavoritesCocktailView()
+                    } label: {
+                        Image(systemName: "bookmark")
+                            .foregroundStyle(.white)
+                    }
+                }
             }
         }
     }

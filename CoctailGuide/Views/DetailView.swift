@@ -26,7 +26,7 @@ struct DetailView: View {
                     Text(ingredient)
                         .foregroundStyle(.brown)
                 }
-                Button(saved ? "Сохранено ✅" : "Сохранить в избранное") {
+                Button(saved ? "Saved ✅" : "Add to favorites") {
                     vm.saveCocktail(cocktail: cocktail, context: modelContext)
                     saved = true
                 }
